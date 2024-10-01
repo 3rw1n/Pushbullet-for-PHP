@@ -40,9 +40,11 @@ class Device
 
 
         $data = [
-            'adresses' => [ $toNumber ],
-            'target_device_iden' => $this->iden,
-            'message' => $message
+            'data' => [
+                'adresses' => [ $toNumber ],
+                'target_device_iden' => $this->iden,
+                'message' => $message
+            ];
         ];
 
         Connection::sendCurlRequest(Connection::URL_TEXTS, 'POST', $data, true, $this->apiKey);
