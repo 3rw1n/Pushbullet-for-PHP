@@ -38,6 +38,19 @@ class Device
             throw new Exceptions\NoSmsException("Device cannot send SMS messages.");
         }
 
+
+        $data = [
+            'adresses' => $toNumber,
+            'target_device_iden' => $this->iden,
+            'message' => $message
+        ];
+
+        return new Push(
+            Connection::sendCurlRequest(Connection::URL_TEXTS, 'POST', $data, true, $this->apiKey),
+            $this->apiKey
+        );
+
+/*
         $data = [
             'type' => 'push',
             'push' => [
@@ -54,6 +67,7 @@ class Device
             Connection::sendCurlRequest(Connection::URL_EPHEMERALS, 'POST', $data, true, $this->apiKey),
             $this->apiKey
         );
+    */
     }
 
     /**
