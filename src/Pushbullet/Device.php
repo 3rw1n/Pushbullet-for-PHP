@@ -44,10 +44,13 @@ class Device
                 'adresses' => [ $toNumber ],
                 'target_device_iden' => $this->iden,
                 'message' => $message
-            ];
+            ]
         ];
 
-        Connection::sendCurlRequest(Connection::URL_TEXTS, 'POST', $data, true, $this->apiKey);
+        return new Push(
+            Connection::sendCurlRequest(Connection::URL_TEXTS, 'POST', $data, true, $this->apiKey),
+            $this->apiKey
+        );
 
 /*
         $data = [
